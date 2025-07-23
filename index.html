@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendizaje UX/UI - Enfoque Pedagógico</title>
+    <style>
+        :root {
+            --black: #000000;
+            --dark-gray: #333333;
+            --medium-gray: #666666;
+            --light-gray: #999999;
+            --lighter-gray: #CCCCCC;
+            --lightest-gray: #EEEEEE;
+            --white: #FFFFFF;
+            --radius: 4px;
+            --shadow: 0 2px 4px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        header {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: normal;
+            transition: var(--transition);
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            border-bottom: 2px solid var(--white);
+        }
+
+        .hero {
+            background-color: var(--lightest-gray);
+            padding: 5rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--lighter-gray);
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: normal;
+            line-height: 1.3;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            color: var(--dark-gray);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 0.9rem 2rem;
+            border: 1px solid var(--black);
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: var(--white);
+            color: var(--black);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--black);
+            border: 1px solid var(--black);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--black);
+            color: var(--white);
+        }
+
+        .learning-path {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--lighter-gray);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            font-weight: normal;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--black);
+        }
+
+        .modules-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .module-card {
+            background-color: var(--white);
+            border: 1px solid var(--lighter-gray);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .module-header {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .module-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background-color: var(--white);
+            color: var(--black);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 1px solid var(--black);
+        }
+
+        .module-body {
+            padding: 2rem;
+        }
+
+        .module-body h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+
+        .module-body p {
+            margin-bottom: 1.5rem;
+            color: var(--medium-gray);
+        }
+
+        .progress-container {
+            margin: 1.5rem 0;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background-color: var(--lightest-gray);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--black);
+            width: 0%;
+            transition: width 1s ease;
+        }
+
+        .theory-section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--lighter-gray);
+        }
+
+        .theory-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .theory-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: normal;
+        }
+
+        .theory-content p {
+            margin-bottom: 1.5rem;
+            color: var(--dark-gray);
+        }
+
+        .theory-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 2rem 0;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--lighter-gray);
+        }
+
+        .theory-content blockquote {
+            border-left: 3px solid var(--black);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--medium-gray);
+        }
+
+        .tasks-section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--lighter-gray);
+        }
+
+        .task-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--lightest-gray);
+            transition: var(--transition);
+        }
+
+        .task-item:hover {
+            background-color: var(--lightest-gray);
+        }
+
+        .task-checkbox {
+            margin-right: 1rem;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .task-text {
+            flex-grow: 1;
+        }
+
+        .task-completed {
+            text-decoration: line-through;
+            color: var(--light-gray);
+        }
+
+        .resources-section {
+            padding: 4rem 0;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .resource-card {
+            border: 1px solid var(--lighter-gray);
+            border-radius: var(--radius);
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .resource-card:hover {
+            background-color: var(--lightest-gray);
+        }
+
+        .resource-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+
+        .resource-card p {
+            margin-bottom: 1.5rem;
+            color: var(--medium-gray);
+        }
+
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin-bottom: 1rem;
+            color: var(--lighter-gray);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .modules-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Aprendizaje UX/UI</div>
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Inicio</a></li>
+                    <li><a href="#modules">Módulos</a></li>
+                    <li><a href="#theory">Teoría</a></li>
+                    <li><a href="#tasks">Tareas</a></li>
+                    <li><a href="#resources">Recursos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>El Proceso Completo de Aprendizaje en Diseño UX/UI</h1>
+            <p>Un enfoque metódico y profundo para dominar los principios fundamentales del diseño de experiencia e interfaz de usuario.</p>
+            <a href="#modules" class="btn">Explorar Módulos</a>
+            <a href="#theory" class="btn btn-outline">Leer Fundamentos</a>
+        </div>
+    </section>
+
+    <section class="learning-path" id="modules">
+        <div class="container">
+            <h2 class="section-title">Ruta de Aprendizaje Estructurada</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--medium-gray);">
+                Nuestro programa sigue una progresión pedagógica cuidadosamente diseñada para construir conocimiento de manera secuencial y acumulativa.
+            </p>
+            
+            <div class="modules-container">
+                <!-- Módulo 1 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-number">1</div>
+                        <h3>Fundamentos Conceptuales</h3>
+                    </div>
+                    <div class="module-body">
+                        <p>Comprende los principios teóricos que sustentan el diseño de experiencias efectivas.</p>
+                        
+                        <div class="progress-container">
+                            <div class="progress-label">
+                                <span>Progreso</span>
+                                <span>30%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        
+                        <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: var(--medium-gray);">
+                            <li style="margin-bottom: 0.5rem;">Psicología del usuario</li>
+                            <li style="margin-bottom: 0.5rem;">Jerarquía visual</li>
+                            <li style="margin-bottom: 0.5rem;">Principios de Gestalt</li>
+                        </ul>
+                        
+                        <a href="#" class="btn" style="display: block; text-align: center;">Continuar Estudio</a>
+                    </div>
+                </div>
+                
+                <!-- Módulo 2 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-number">2</div>
+                        <h3>Investigación Contextual</h3>
+                    </div>
+                    <div class="module-body">
+                        <p>Aprende metodologías para recolectar y analizar datos sobre necesidades y comportamientos de usuarios.</p>
+                        
+                        <div class="progress-container">
+                            <div class="progress-label">
+                                <span>Progreso</span>
+                                <span>15%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 15%"></div>
+                            </div>
+                        </div>
+                        
+                        <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: var(--medium-gray);">
+                            <li style="margin-bottom: 0.5rem;">Entrevistas cualitativas</li>
+                            <li style="margin-bottom: 0.5rem;">Mapas de empatía</li>
+                            <li style="margin-bottom: 0.5rem;">User personas</li>
+                        </ul>
+                        
+                        <a href="#" class="btn" style="display: block; text-align: center;">Iniciar Módulo</a>
+                    </div>
+                </div>
+                
+                <!-- Módulo 3 -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-number">3</div>
+                        <h3>Arquitectura de Información</h3>
+                    </div>
+                    <div class="module-body">
+                        <p>Domina la organización estructural de interfaces para una navegación intuitiva y eficiente.</p>
+                        
+                        <div class="progress-container">
+                            <div class="progress-label">
+                                <span>Progreso</span>
+                                <span>5%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 5%"></div>
+                            </div>
+                        </div>
+                        
+                        <ul style="margin: 1.5rem 0; padding-left: 1.5rem; color: var(--medium-gray);">
+                            <li style="margin-bottom: 0.5rem;">Taxonomías y categorización</li>
+                            <li style="margin-bottom: 0.5rem;">User flows</li>
+                            <li style="margin-bottom: 0.5rem;">Sistemas de navegación</li>
+                        </ul>
+                        
+                        <a href="#" class="btn" style="display: block; text-align: center;">Explorar Contenido</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="theory-section" id="theory">
+        <div class="container">
+            <div class="theory-content">
+                <h2 class="section-title">Fundamentos Teóricos del UX Design</h2>
+                
+                <p>El diseño de experiencia de usuario (UX) se fundamenta en principios interdisciplinarios que combinan psicología cognitiva, diseño visual y arquitectura de información. Comprender estos cimientos teóricos es esencial para tomar decisiones de diseño informadas en lugar de basadas en suposiciones.</p>
+                
+                <h3>1. Psicología Cognitiva Aplicada</h3>
+                <p>La forma en que los usuarios perciben, procesan y recuerdan información sigue patrones predecibles:</p>
+                
+                <blockquote>
+                    "Los usuarios no leen páginas web, las escanean buscando elementos familiares. Este comportamiento está arraigado en nuestros mecanismos de supervivencia evolutivos."
+                </blockquote>
+                
+                <p><strong>Principios clave:</strong></p>
+                <ul style="margin: 1.5rem 0; padding-left: 1.5rem;">
+                    <li style="margin-bottom: 0.8rem;"><strong>Ley de Hick:</strong> El tiempo para tomar una decisión aumenta con el número de opciones disponibles.</li>
+                    <li style="margin-bottom: 0.8rem;"><strong>Efecto de posición serial:</strong> Los usuarios recuerdan mejor el primer y último elemento de una serie.</li>
+                    <li style="margin-bottom: 0.8rem;"><strong>Carga cognitiva:</strong> La cantidad máxima de información que podemos procesar conscientemente en un momento dado.</li>
+                </ul>
+                
+                <h3>2. Jerarquía Visual y Percepción</h3>
+                <p>La teoría de la Gestalt explica cómo los usuarios organizan visualmente los elementos en grupos:</p>
+                
+                <ul style="margin: 1.5rem 0; padding-left: 1.5rem;">
+                    <li style="margin-bottom: 0.8rem;"><strong>Ley de proximidad:</strong> Elementos cercanos se perciben como relacionados</li>
+                    <li style="margin-bottom: 0.8rem;"><strong>Ley de semejanza:</strong> Elementos similares se agrupan automáticamente</li>
+                    <li style="margin-bottom: 0.8rem;"><strong>Ley de continuidad:</strong> El ojo sigue líneas y curvas fluidas</li>
+                </ul>
+                
+                <h3>3. Modelos Mentales y Expectativas</h3>
+                <p>Los usuarios desarrollan modelos mentales basados en experiencias previas. El diseño efectivo aprovecha estos modelos existentes:</p>
+                
+                <p>Ejemplo: El icono de una casa representa "inicio" debido a convenciones establecidas, no por una cualidad inherente del símbolo.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="tasks-section" id="tasks">
+        <div class="container">
+            <h2 class="section-title">Tareas de Aplicación Práctica</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--medium-gray);">
+                El aprendizaje efectivo requiere alternar entre teoría y práctica. Estas actividades están diseñadas para consolidar tu comprensión.
+            </p>
+            
+            <div class="task-list">
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" id="task1">
+                    <label for="task1" class="task-text">
+                        <strong>Análisis Heurístico:</strong> Selecciona un sitio web o aplicación y evalúa su usabilidad basándote en los 10 principios de Nielsen.
+                    </label>
+                </div>
+                
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" id="task2" checked>
+                    <label for="task2" class="task-text task-completed">
+                        <strong>Mapa de Empatía:</strong> Crea un perfil de usuario ficticio y desarrolla su mapa de empatía considerando pensamientos, sentimientos, dolores y ganancias.
+                    </label>
+                </div>
+                
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" id="task3">
+                    <label for="task3" class="task-text">
+                        <strong>Prueba de los 5 segundos:</strong> Muestra una interfaz a un compañero durante 5 segundos y registra qué elementos recuerda.
+                    </label>
+                </div>
+                
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" id="task4">
+                    <label for="task4" class="task-text">
+                        <strong>Auditoría de Contenido:</strong> Analiza cómo está organizada la información en un sitio web existente y propone mejoras.
+                    </label>
+                </div>
+                
+                <div class="task-item">
+                    <input type="checkbox" class="task-checkbox" id="task5">
+                    <label for="task5" class="task-text">
+                        <strong>User Flow:</strong> Diagrama el recorrido completo de un usuario para completar una tarea específica.
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="resources-section" id="resources">
+        <div class="container">
+            <h2 class="section-title">Recursos para Profundizar</h2>
+            <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--medium-gray);">
+                Materiales seleccionados para complementar tu aprendizaje autónomo.
+            </p>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3>Libros Esenciales</h3>
+                    <p>Obras fundamentales que todo diseñador UX/UI debería conocer:</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--medium-gray);">
+                        <li style="margin-bottom: 0.5rem;">"Don't Make Me Think" - Steve Krug</li>
+                        <li style="margin-bottom: 0.5rem;">"The Design of Everyday Things" - Don Norman</li>
+                        <li style="margin-bottom: 0.5rem;">"About Face" - Alan Cooper</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Artículos Académicos</h3>
+                    <p>Investigaciones relevantes sobre cognición y diseño:</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--medium-gray);">
+                        <li style="margin-bottom: 0.5rem;">"The Magical Number Seven" - George Miller</li>
+                        <li style="margin-bottom: 0.5rem;">"Fitts' Law" - Paul Fitts</li>
+                        <li>"Cognitive Load Theory" - John Sweller</li>
+                    </ul>
+                </div>
+                
+                <div class="resource-card">
+                    <h3>Herramientas Profesionales</h3>
+                    <p>Software utilizado en la industria para diseño UX/UI:</p>
+                    <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--medium-gray);">
+                        <li style="margin-bottom: 0.5rem;">Figma (Prototipado)</li>
+                        <li style="margin-bottom: 0.5rem;">Miro (Mapeo mental)</li>
+                        <li>Optimal Workshop (Testing)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>Este sistema de aprendizaje fue diseñado siguiendo principios pedagógicos probados para maximizar la retención y aplicación del conocimiento.</p>
+                <p>© 2023 - Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sistema de progreso interactivo
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animar barras de progreso
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 500);
+            });
+            
+            // Manejar checkboxes de tareas
+            const checkboxes = document.querySelectorAll('.task-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const label = this.nextElementSibling;
+                    if(this.checked) {
+                        label.classList.add('task-completed');
+                    } else {
+                        label.classList.remove('task-completed');
+                    }
+                });
+            });
+            
+            // Simular carga de módulos (en una aplicación real esto vendría de una API)
+            setTimeout(() => {
+                document.querySelector('.module-card:nth-child(1) .progress-fill').style.width = '30%';
+                document.querySelector('.module-card:nth-child(2) .progress-fill').style.width = '15%';
+                document.querySelector('.module-card:nth-child(3) .progress-fill').style.width = '5%';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
